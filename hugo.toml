@@ -1,0 +1,17 @@
+baseURL = "https://rawlingstigersnova.com/"
+locale = "en-US"
+title = "Rawlings Tigers NOVA"
+summaryLength = 24
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[params]
+  description = "Rawlings Tigers NOVA travel baseball in Northern Virginia."
+  brandColor = "#F65F16"
+  location = "Northern Virginia"
+
+[build]
+  writeStats = true

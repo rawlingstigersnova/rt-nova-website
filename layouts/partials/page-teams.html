@@ -1,0 +1,40 @@
+{{ $data := .Site.Data.teams }}
+{{ partial "hero.html" (dict "kicker" "Team Central" "title" .Title "intro" $data.intro "actions" (slice (dict "label" "Tryouts" "url" "/tryouts/" "class" "rt-btn-primary") (dict "label" "View Coaches" "url" "/coaches/" "class" "rt-btn-outline"))) }}
+<section class="rt-section">
+  <div class="rt-container rt-section-heading">
+    <p class="rt-eyebrow rt-eyebrow--dark">Teams by Season</p>
+    <h2>Browse teams, coaches, status, and links.</h2>
+  </div>
+  <div class="rt-container rt-stack">
+    {{ range $data.seasons }}
+    <section class="rt-season-block">
+      <div class="rt-season-head">
+        <div>
+          <span class="rt-eyebrow">Season</span>
+          <h2>{{ .name }}</h2>
+        </div>
+        <span class="rt-season-count">{{ len .teams }} teams</span>
+      </div>
+      <div class="rt-card-grid rt-card-grid--3">
+        {{ range .teams }}
+        {{ $team := . }}
+        <article class="rt-team-card">
+          <div class="rt-team-card__top">
+            <span class="rt-badge rt-badge--{{ lower $team.status }}">{{ $team.status }}</span>
+            <span class="rt-team-record">{{ $team.record }}</span>
+          </div>
+          <h3>{{ $team.name }}</h3>
+          <div class="rt-person-inline">
+            {{ with $team.coach_photo }}<img src="{{ partial "url.html" . }}" alt="{{ $team.head_coach }}">{{ end }}
+            <span><small>{{ $team.coach_role }}</small><strong>{{ $team.head_coach }}</strong></span>
+          </div>
+          <div class="rt-link-row">
+            {{ range $team.links }}<a href="{{ partial "url.html" .url }}">{{ .label }}</a>{{ else }}<span class="rt-muted">Team links coming soon</span>{{ end }}
+          </div>
+        </article>
+        {{ end }}
+      </div>
+    </section>
+    {{ end }}
+  </div>
+</section>

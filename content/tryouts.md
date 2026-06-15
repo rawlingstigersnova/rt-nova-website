@@ -1,0 +1,4 @@
+---
+title: "Tryouts"
+template: "tryouts"
+---

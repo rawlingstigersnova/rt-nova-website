@@ -1,0 +1,51 @@
+{{ $data := .Site.Data.tryouts }}
+{{ partial "hero.html" (dict "kicker" $data.season "title" $data.title "intro" $data.intro "actions" (slice (dict "label" "Register" "url" $data.registration_url "class" "rt-btn-primary") (dict "label" "View FAQ" "url" "#tryout-faq" "class" "rt-btn-outline"))) }}
+<section class="rt-proof-strip rt-proof-strip--light">
+  <div class="rt-container rt-proof-grid">
+    {{ range $data.evaluation_areas }}<div><strong>{{ . }}</strong><span>Evaluation focus area</span></div>{{ end }}
+  </div>
+</section>
+<section class="rt-section">
+  <div class="rt-container rt-section-heading">
+    <p class="rt-eyebrow rt-eyebrow--dark">Evaluation Schedule</p>
+    <h2>Tryout groups and sessions.</h2>
+  </div>
+  <div class="rt-container rt-card-grid rt-card-grid--2">
+  {{ range $data.groups }}
+    <article class="rt-tryout-card">
+      <div class="rt-tryout-card__head">
+        <h3>{{ .age_group }}</h3>
+        <span>{{ .coach }}</span>
+      </div>
+      <div class="rt-session-list">
+        {{ range .sessions }}
+        <div class="rt-session">
+          <span class="rt-badge rt-badge--active">{{ .type }}</span>
+          <strong>{{ .date }}</strong>
+          <span>{{ .time }}</span>
+          <span>{{ .location }}</span>
+        </div>
+        {{ end }}
+      </div>
+    </article>
+  {{ end }}
+  </div>
+</section>
+{{ with $data.age_chart_image }}
+<section class="rt-section rt-section--tight">
+  <div class="rt-container rt-section-heading">
+    <p class="rt-eyebrow rt-eyebrow--dark">Age Chart</p>
+    <h2>Confirm your player’s baseball age.</h2>
+  </div>
+  <div class="rt-container rt-media-card"><img src="{{ partial "url.html" . }}" alt="{{ $data.age_chart_alt }}" loading="lazy"></div>
+</section>
+{{ end }}
+<section id="tryout-faq" class="rt-section">
+  <div class="rt-container rt-section-heading">
+    <p class="rt-eyebrow rt-eyebrow--dark">FAQ</p>
+    <h2>Common tryout questions.</h2>
+  </div>
+  <div class="rt-container rt-faq-list">
+    {{ range $data.faq }}<details class="rt-faq"><summary>{{ .question }}</summary><p>{{ .answer }}</p></details>{{ end }}
+  </div>
+</section>

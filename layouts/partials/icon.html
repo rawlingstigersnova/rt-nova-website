@@ -1,0 +1,37 @@
+{{- $name := . | default "bat-4-svgrepo-com" -}}
+{{- $aliases := dict
+  "x" "twitter-x"
+  "twitter" "twitter-x"
+
+  "player-development" "helmet-2-svgrepo-com"
+  "rising-player" "helmet-2-svgrepo-com"
+  "helmet" "helmet-2-svgrepo-com"
+  "helmet-2" "helmet-2-svgrepo-com"
+
+  "competitive-teams" "bat-4-svgrepo-com"
+  "crossed-bats" "bat-4-svgrepo-com"
+  "baseball-bat" "bat-4-svgrepo-com"
+  "bat" "bat-4-svgrepo-com"
+  "bat-4" "bat-4-svgrepo-com"
+
+  "professional-coaching" "whistle-1-svgrepo-com"
+  "whistle" "whistle-1-svgrepo-com"
+  "whistle-1" "whistle-1-svgrepo-com"
+
+  "home-base" "baseball-stadium-1-svgrepo-com"
+  "home-plate" "baseball-stadium-1-svgrepo-com"
+  "baseball-stadium" "baseball-stadium-1-svgrepo-com"
+  "baseball-stadium-1" "baseball-stadium-1-svgrepo-com"
+-}}
+
+{{- $icon := index $aliases $name | default $name -}}
+{{- $svgRepoPath := printf "assets/icons/svgrepo-icooon-mono/%s.svg" $icon -}}
+{{- $bootstrapPath := printf "assets/icons/bootstrap/%s.svg" $icon -}}
+
+{{- if fileExists $svgRepoPath -}}
+  {{- readFile $svgRepoPath | safeHTML -}}
+{{- else if fileExists $bootstrapPath -}}
+  {{- readFile $bootstrapPath | safeHTML -}}
+{{- else -}}
+  {{- readFile "assets/icons/svgrepo-icooon-mono/bat-4-svgrepo-com.svg" | safeHTML -}}
+{{- end -}}

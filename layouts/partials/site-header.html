@@ -1,0 +1,40 @@
+{{ $mainNav := default (slice) .Site.Data.navigation.main }}
+{{ $utilityNav := default (slice) .Site.Data.navigation.utility }}
+<header class="site-header site-header--twelve" role="banner">
+  <div class="site-header__bar rt-shell--wide">
+    <a class="site-brand site-brand--image" href="{{ partial "url.html" "/" }}" aria-label="Rawlings Tigers NOVA home">
+      <img src="{{ partial "url.html" "/images/teamlinkt/rawlings-tigers-nova-round-logo.png" }}" alt="Rawlings Tigers Northern Virginia" class="site-brand__logo">
+      <span class="site-brand__wordmark">
+        <span class="site-brand__main">Rawlings Tigers</span>
+        <span class="site-brand__sub">Northern Virginia Baseball</span>
+      </span>
+    </a>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+      <span class="sr-only">Menu</span>
+    </button>
+
+    <nav id="site-nav" class="site-nav site-nav--twelve" aria-label="Main navigation">
+      {{ range sort $mainNav "weight" }}
+        <a href="{{ partial "url.html" .url }}">{{ .name }}</a>
+      {{ end }}
+      {{ range sort $utilityNav "weight" }}
+        <a class="site-nav__utility" href="{{ partial "url.html" .url }}">{{ .name }}</a>
+      {{ end }}
+      <a class="site-nav__mobile-cta" href="{{ partial "url.html" "/become-a-tiger/" }}">Become A Tiger</a>
+    </nav>
+
+    <div class="site-header__actions" aria-label="Social and signup links">
+      <a class="site-social-icon" href="https://instagram.com/rawlingstigersnova/" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+        {{ partial "icon.html" "instagram" }}
+      </a>
+      <a class="site-social-icon" href="https://www.facebook.com/rawlingstigersNOVA/" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+        {{ partial "icon.html" "facebook" }}
+      </a>
+      <a class="site-header-cta" href="{{ partial "url.html" "/become-a-tiger/" }}">Become A Tiger</a>
+    </div>
+  </div>
+</header>

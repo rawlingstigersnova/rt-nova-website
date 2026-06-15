@@ -1,0 +1,6 @@
+primary:
+  label: Register for Tryouts
+  url: /tryouts/
+secondary:
+  label: Become A Tiger
+  url: /become-a-tiger/

@@ -1,0 +1,19 @@
+<section class="rt-page-hero">
+  <div class="rt-container rt-page-hero__inner">
+    <div>
+      {{ with .kicker }}<p class="rt-eyebrow">{{ . }}</p>{{ end }}
+      <h1>{{ .title }}</h1>
+      {{ with .intro }}<p class="rt-lead">{{ . }}</p>{{ end }}
+      {{ with .actions }}
+      <div class="rt-action-row">
+        {{ range . }}<a class="rt-btn {{ .class }}" href="{{ partial "url.html" .url }}">{{ .label }}</a>{{ end }}
+      </div>
+      {{ end }}
+    </div>
+    <div class="rt-page-hero__card" aria-hidden="true">
+      <span>NOVA</span>
+      <strong>Rawlings Tigers</strong>
+      <em>Develop • Compete • Represent</em>
+    </div>
+  </div>
+</section>

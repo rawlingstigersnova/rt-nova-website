@@ -1,0 +1,29 @@
+main:
+  - name: Teams
+    url: /teams/
+    weight: 10
+  - name: Tryouts
+    url: /tryouts/
+    weight: 20
+  - name: Coaches
+    url: /coaches/
+    weight: 30
+  - name: Player Development
+    url: /player-development/
+    weight: 40
+  - name: Accolades
+    url: /accolades/
+    weight: 50
+  - name: Sponsors
+    url: /sponsors/
+    weight: 60
+  - name: Family Hub
+    url: /family-hub/
+    weight: 70
+utility:
+  - name: Watch Now
+    url: /watch-now/
+    weight: 10
+  - name: Contact
+    url: mailto:rawlingstigersnova@gmail.com
+    weight: 30

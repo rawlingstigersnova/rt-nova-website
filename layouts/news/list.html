@@ -1,0 +1,94 @@
+{{ define "main" }}
+  {{ $pages := .RegularPages.ByDate.Reverse }}
+  {{ $featured := index $pages 0 }}
+  {{ $secondary := after 1 (first 4 $pages) }}
+  {{ $more := after 4 $pages }}
+
+  <section class="rt-section rt-section--cream news-index">
+    <div class="rt-shell news-index__shell">
+      <div class="section-intro section-intro--center news-index__intro">
+        <p class="rt-kicker rt-kicker--dark">Program News</p>
+        <h1>{{ .Title }}</h1>
+        <p>{{ with .Description }}{{ . }}{{ else }}Latest team news, player highlights, tournament results, and program updates from Rawlings Tigers NOVA.{{ end }}</p>
+      </div>
+
+      {{ if $featured }}
+        {{ $image := $featured.Params.image }}
+        <article class="news-feature-card">
+          <a class="news-feature-card__link" href="{{ $featured.RelPermalink }}" aria-label="{{ $featured.Title }}">
+            <div class="news-feature-card__meta">
+              <time datetime="{{ $featured.Date.Format "2006-01-02" }}">{{ $featured.Date.Format "Jan 2, 2006" }}</time>
+              {{ with $featured.Params.badge }}<span>{{ . }}</span>{{ end }}
+            </div>
+            {{ with $image }}
+              <div class="news-feature-card__image">
+                <img src="{{ . | relURL }}" alt="{{ $featured.Params.image_alt | default $featured.Title }}" loading="eager" decoding="async">
+              </div>
+            {{ end }}
+            <div class="news-feature-card__body">
+              <h2>{{ $featured.Title }}</h2>
+              <p>{{ $featured.Params.excerpt | default $featured.Summary | plainify }}</p>
+              <span class="news-card__cta">Read Article</span>
+            </div>
+          </a>
+        </article>
+      {{ end }}
+
+      {{ if $secondary }}
+        <div class="news-index__recent-header">
+          <h2>Recent News</h2>
+        </div>
+        <div class="news-card-grid">
+          {{ range $secondary }}
+            {{ $image := .Params.image }}
+            <article class="news-card">
+              <a href="{{ .RelPermalink }}" class="news-card__link" aria-label="{{ .Title }}">
+                {{ with $image }}
+                  <div class="news-card__image">
+                    <img src="{{ . | relURL }}" alt="{{ $.Params.image_alt | default $.Title }}" loading="lazy" decoding="async">
+                  </div>
+                {{ end }}
+                <div class="news-card__body">
+                  <div class="news-card__meta">
+                    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+                    {{ with .Params.badge }}<span>{{ . }}</span>{{ end }}
+                  </div>
+                  <h3>{{ .Title }}</h3>
+                  <p>{{ .Params.excerpt | default .Summary | plainify }}</p>
+                </div>
+              </a>
+            </article>
+          {{ end }}
+        </div>
+      {{ end }}
+
+      {{ if $more }}
+        <details class="news-more">
+          <summary>Load More</summary>
+          <div class="news-card-grid news-card-grid--more">
+            {{ range $more }}
+              {{ $image := .Params.image }}
+              <article class="news-card">
+                <a href="{{ .RelPermalink }}" class="news-card__link" aria-label="{{ .Title }}">
+                  {{ with $image }}
+                    <div class="news-card__image">
+                      <img src="{{ . | relURL }}" alt="{{ $.Params.image_alt | default $.Title }}" loading="lazy" decoding="async">
+                    </div>
+                  {{ end }}
+                  <div class="news-card__body">
+                    <div class="news-card__meta">
+                      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+                      {{ with .Params.badge }}<span>{{ . }}</span>{{ end }}
+                    </div>
+                    <h3>{{ .Title }}</h3>
+                    <p>{{ .Params.excerpt | default .Summary | plainify }}</p>
+                  </div>
+                </a>
+              </article>
+            {{ end }}
+          </div>
+        </details>
+      {{ end }}
+    </div>
+  </section>
+{{ end }}

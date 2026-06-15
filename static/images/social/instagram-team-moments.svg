@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Instagram team moments placeholder</title>
+  <desc id="desc">Rawlings Tigers NOVA social graphic for Instagram team moments.</desc>
+  <rect width="1200" height="800" fill="#f6f1e8"/>
+  <rect x="72" y="72" width="1056" height="656" fill="#07111f"/>
+  <circle cx="238" cy="238" r="92" fill="#f15a24"/>
+  <circle cx="970" cy="570" r="190" fill="#f15a24" opacity="0.26"/>
+  <path d="M120 610 L370 345 L520 485 L675 300 L1080 650 L1080 690 L120 690 Z" fill="#ffffff" opacity="0.13"/>
+  <text x="120" y="150" fill="#f15a24" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="900" letter-spacing="8">INSTAGRAM</text>
+  <text x="120" y="455" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="76" font-weight="900" letter-spacing="7">PLAYER</text>
+  <text x="120" y="545" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="76" font-weight="900" letter-spacing="7">HIGHLIGHTS</text>
+  <text x="120" y="640" fill="#d8dee9" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700">Photos, reels, and moments from around the program.</text>
+</svg>

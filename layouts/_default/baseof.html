@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} | {{ site.Title }}{{ end }}</title>
+  <meta name="description" content="{{ with .Summary }}{{ . | plainify }}{{ else }}{{ site.Params.description }}{{ end }}">
+  {{ $css := resources.Get "css/main.css" | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}">
+
+  {{ with resources.Get "css/social-hub.css" }}
+    {{ $socialHubCSS := . | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $socialHubCSS.RelPermalink }}" integrity="{{ $socialHubCSS.Data.Integrity }}">
+  {{ end }}
+
+  {{ with resources.Get "css/news.css" }}
+    {{ $newsCSS := . | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $newsCSS.RelPermalink }}" integrity="{{ $newsCSS.Data.Integrity }}">
+  {{ end }}
+
+  {{ with resources.Get "css/footer-cleanup.css" }}
+    {{ $footerCleanupCSS := . | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $footerCleanupCSS.RelPermalink }}" integrity="{{ $footerCleanupCSS.Data.Integrity }}">
+  {{ end }}
+
+  {{ with resources.Get "css/responsive-polish.css" }}
+    {{ $responsiveCSS := . | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $responsiveCSS.RelPermalink }}" integrity="{{ $responsiveCSS.Data.Integrity }}">
+  {{ end }}
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  {{ partial "site-header.html" . }}
+  <main id="main-content">
+    {{ block "main" . }}{{ end }}
+  </main>
+  {{ partial "site-footer.html" . }}
+  {{ $js := resources.Get "js/main.js" | minify | fingerprint }}
+  <script src="{{ $js.RelPermalink }}" defer></script>
+</body>
+</html>

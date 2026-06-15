@@ -1,0 +1,186 @@
+{{ define "main" }}
+{{ $home := .Site.Data.homepage }}
+
+<section class="home-hero">
+  <div class="home-hero__media" aria-hidden="true">
+    <img src="{{ partial "url.html" $home.hero.image }}" alt="">
+  </div>
+  <div class="rt-shell home-hero__inner">
+    <div class="home-hero__copy">
+      <p class="rt-kicker">{{ $home.hero.kicker }}</p>
+      <h1>{{ range $i, $line := $home.hero.title_lines }}<span>{{ $line }}</span>{{ end }}</h1>
+      <p class="home-hero__lead">{{ $home.hero.intro }}</p>
+      <div class="rt-action-row">
+        <a class="rt-btn rt-btn--orange" href="{{ partial "url.html" $home.hero.primary.url }}">{{ $home.hero.primary.label }}</a>
+        <a class="rt-btn rt-btn--ghost" href="{{ partial "url.html" $home.hero.secondary.url }}">{{ $home.hero.secondary.label }}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="program-strip">
+  <div class="rt-shell program-strip__grid">
+    {{ range $home.pillars }}
+    <article class="program-strip__item">
+      <span class="rt-line-icon" aria-hidden="true">{{ partial "icon.html" .icon }}</span>
+      <h2>{{ .title }}</h2>
+      <p>{{ .text }}</p>
+    </article>
+    {{ end }}
+  </div>
+</section>
+
+<section class="rt-section rt-section--white home-statement">
+  <div class="rt-shell section-intro section-intro--center">
+    <p class="rt-kicker rt-kicker--dark">{{ $home.why.kicker }}</p>
+    <h2>{{ $home.why.title }}</h2>
+    <p>{{ $home.why.intro }}</p>
+  </div>
+</section>
+
+<section class="proof-band">
+  <div class="rt-shell proof-band__grid">
+    {{ range $home.proof }}
+    <div><strong>{{ .value }}</strong><span>{{ .label }}</span></div>
+    {{ end }}
+  </div>
+</section>
+
+<section class="rt-section rt-section--cream social-hub">
+  {{/*
+    Homepage Social Hub feed.
+    Source 1: content/social-hub/*.md
+    Source 2: content/news/*.md where show_on_home_social: true
+
+    This lets a news article appear on the homepage without creating a duplicate
+    social-hub card. Set hide_from_home_social: true on any older duplicate
+    social-hub markdown cards that have been replaced by a real news article.
+  */}}
+  {{ $socialPosts := where .Site.RegularPages "Section" "social-hub" }}
+  {{ $socialPosts = where $socialPosts "Params.hide_from_home_social" "!=" true }}
+  {{ $newsPosts := where .Site.RegularPages "Section" "news" }}
+  {{ $newsPosts = where $newsPosts "Params.show_on_home_social" true }}
+  {{ $updates := slice }}
+  {{ range $socialPosts }}{{ $updates = $updates | append . }}{{ end }}
+  {{ range $newsPosts }}{{ $updates = $updates | append . }}{{ end }}
+  {{ $updates = sort $updates "Date" "desc" }}
+
+  <div class="rt-shell social-hub__layout social-hub__layout--feed">
+    <div class="social-hub__intro social-hub__intro--center">
+      <p class="rt-kicker rt-kicker--dark">{{ $home.social.kicker }}</p>
+      <h2>{{ $home.social.title }}</h2>
+      <p>{{ $home.social.text }}</p>
+      <div class="social-hub__buttons" aria-label="Social media links">
+        {{ range $home.social.buttons }}
+        <a class="social-hub__button" href="{{ .url }}" target="_blank" rel="noopener noreferrer">
+          <span aria-hidden="true">{{ partial "icon.html" .icon }}</span>
+          {{ .label }}
+        </a>
+        {{ end }}
+      </div>
+    </div>
+
+    {{ if $updates }}
+    {{ $hasMore := gt (len $updates) 3 }}
+    <div class="social-feed" aria-label="Social Hub updates">
+      {{ if $hasMore }}<input class="social-feed__toggle" type="checkbox" id="social-feed-toggle" aria-label="Show more social updates">{{ end }}
+      <div class="social-feed-grid">
+        {{ range $i, $post := $updates }}
+          {{/*
+            Simplified Social Hub fields:
+            - platform: controls the small source icon and platform label
+            - link: destination URL for the card/button
+            - image: local image path or direct external image URL
+            - caption: short card text
+          */}}
+          {{ $destination := $post.RelPermalink }}
+          {{ $external := false }}
+          {{ $isNews := eq $post.Section "news" }}
+          {{ with $post.Params.link }}{{ $destination = . }}{{ end }}
+          {{ with $post.Params.external_url }}{{ $destination = . }}{{ end }}
+          {{ if or (hasPrefix $destination "http://") (hasPrefix $destination "https://") }}{{ $external = true }}{{ end }}
+
+          {{ $platform := $post.Params.platform | default $post.Params.type | default "RT NOVA" }}
+          {{ if and $isNews (not $post.Params.platform) (not $post.Params.type) }}{{ $platform = "Team News" }}{{ end }}
+          {{ $platformKey := lower $platform }}
+          {{ $platformIcon := "baseball-stadium-1" }}
+          {{ if in $platformKey "instagram" }}{{ $platformIcon = "instagram" }}{{ end }}
+          {{ if in $platformKey "facebook" }}{{ $platformIcon = "facebook" }}{{ end }}
+
+          {{ $image := $post.Params.image }}
+          {{ $imageFit := $post.Params.image_fit | default "contain" }}
+          {{ $imgSrc := "" }}
+          {{ $imgExternal := false }}
+          {{ with $image }}
+            {{ $imgSrc = . }}
+            {{ if or (hasPrefix . "http://") (hasPrefix . "https://") }}
+              {{ $imgExternal = true }}
+            {{ else }}
+              {{ $imgSrc = partial "url.html" . }}
+            {{ end }}
+          {{ end }}
+
+          <article class="social-feed-card{{ if ge $i 3 }} social-feed-card--extra{{ end }}">
+            <a class="social-feed-card__link" href="{{ $destination }}" {{ if $external }}target="_blank" rel="noopener noreferrer"{{ end }} aria-label="{{ $post.Title }}">
+              <div class="social-feed-card__top">
+                <div class="social-feed-card__avatar" aria-hidden="true">
+                  <span>{{ with $post.Params.avatar_text }}{{ . }}{{ else }}RT{{ end }}</span>
+                </div>
+                <div class="social-feed-card__account">
+                  <strong>{{ with $post.Params.account }}{{ . }}{{ else }}Rawlings Tigers NOVA{{ end }}</strong>
+                  <span>{{ $post.Date.Format "Jan 2, 2006" }}</span>
+                </div>
+                <span class="social-feed-card__platform" aria-label="{{ $platform }}">{{ partial "icon.html" $platformIcon }}</span>
+              </div>
+
+              <div class="social-feed-card__caption">
+                {{ with $post.Params.caption }}{{ . }}{{ else }}{{ with $post.Params.excerpt }}{{ . }}{{ else }}{{ $post.Title }}{{ end }}{{ end }}
+              </div>
+
+              {{ if $imgSrc }}
+              <div class="social-feed-card__image social-feed-card__image--fit-{{ $imageFit }}">
+                <img loading="lazy" decoding="async" src="{{ if $imgExternal }}{{ $imgSrc | safeURL }}{{ else }}{{ $imgSrc }}{{ end }}" alt="{{ with $post.Params.image_alt }}{{ . }}{{ else }}{{ $post.Title }}{{ end }}"{{ if $imgExternal }} referrerpolicy="no-referrer"{{ end }}>
+              </div>
+              {{ else }}
+              <div class="social-feed-card__image social-feed-card__image--placeholder">
+                <span>{{ $post.Title }}</span>
+              </div>
+              {{ end }}
+
+              <div class="social-feed-card__footer">
+                <span>{{ $platform }}</span>
+                <span>{{ with $post.Params.button }}{{ . }}{{ else }}{{ if $isNews }}Read Article{{ else }}View post{{ end }}{{ end }}</span>
+              </div>
+            </a>
+          </article>
+        {{ end }}
+      </div>
+      {{ if $hasMore }}
+      <div class="social-feed__more">
+        <label class="social-feed__more-button social-feed__more-button--open" for="social-feed-toggle">Load more</label>
+        <label class="social-feed__more-button social-feed__more-button--close" for="social-feed-toggle">Show fewer</label>
+      </div>
+      {{ end }}
+    </div>
+    {{ else }}
+    <div class="social-hub__empty">
+      <p>{{ $home.social.empty_text }}</p>
+    </div>
+    {{ end }}
+  </div>
+</section>
+
+<section class="connect-band">
+  <div class="rt-shell connect-band__inner">
+    <div>
+      <p class="rt-kicker">{{ $home.connect.title }}</p>
+      <p>{{ $home.connect.text }}</p>
+    </div>
+    <div class="rt-action-row">
+      <a class="rt-btn rt-btn--light" href="{{ partial "url.html" $home.connect.primary.url }}">{{ $home.connect.primary.label }}</a>
+      <a class="rt-btn rt-btn--ghost-light" href="{{ partial "url.html" $home.connect.secondary.url }}">{{ $home.connect.secondary.label }}</a>
+    </div>
+  </div>
+</section>
+
+{{ end }}

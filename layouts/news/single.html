@@ -1,0 +1,56 @@
+{{ define "main" }}
+  <article class="rt-section rt-section--cream news-article">
+    <div class="rt-shell news-article__shell">
+      <nav class="news-article__breadcrumb" aria-label="News navigation">
+        <a href="{{ "/news/" | relURL }}">← Back to News</a>
+      </nav>
+
+      <nav class="news-article__pager news-article__pager--simple news-article__pager--top" aria-label="Previous and next news articles">
+        {{ with .PrevInSection }}
+          <a class="news-article__pager-link news-article__pager-link--prev" href="{{ .RelPermalink }}">← Previous Article</a>
+        {{ else }}
+          <span class="news-article__pager-link news-article__pager-link--empty" aria-hidden="true"></span>
+        {{ end }}
+
+        {{ with .NextInSection }}
+          <a class="news-article__pager-link news-article__pager-link--next" href="{{ .RelPermalink }}">Next Article →</a>
+        {{ else }}
+          <span class="news-article__pager-link news-article__pager-link--empty" aria-hidden="true"></span>
+        {{ end }}
+      </nav>
+
+      <header class="news-article__header">
+        <p class="rt-kicker rt-kicker--dark">{{ .Params.team | default "Rawlings Tigers NOVA" }}</p>
+        <h1>{{ .Title }}</h1>
+        <div class="news-article__meta">
+          <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+          {{ with .Params.badge }}<span>{{ . }}</span>{{ end }}
+        </div>
+      </header>
+
+      {{ with .Params.image }}
+        <figure class="news-article__image">
+          <img src="{{ . | relURL }}" alt="{{ $.Params.image_alt | default $.Title }}" loading="eager" decoding="async">
+        </figure>
+      {{ end }}
+
+      <div class="news-article__content rt-prose-card">
+        {{ .Content }}
+      </div>
+
+      <nav class="news-article__pager news-article__pager--simple news-article__pager--bottom" aria-label="Previous and next news articles">
+        {{ with .PrevInSection }}
+          <a class="news-article__pager-link news-article__pager-link--prev" href="{{ .RelPermalink }}">← Previous Article</a>
+        {{ else }}
+          <span class="news-article__pager-link news-article__pager-link--empty" aria-hidden="true"></span>
+        {{ end }}
+
+        {{ with .NextInSection }}
+          <a class="news-article__pager-link news-article__pager-link--next" href="{{ .RelPermalink }}">Next Article →</a>
+        {{ else }}
+          <span class="news-article__pager-link news-article__pager-link--empty" aria-hidden="true"></span>
+        {{ end }}
+      </nav>
+    </div>
+  </article>
+{{ end }}

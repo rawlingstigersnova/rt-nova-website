@@ -1,0 +1,44 @@
+intro: Support Rawlings Tigers NOVA through the NOVA Tigers Booster Club and help
+  fund player development, facilities, tournament travel, scholarships, and community
+  programs.
+contact:
+  phone: (540) 748-5300
+  email: novatigersboosterclub@gmail.com
+packages:
+- name: Single
+  amount: $250
+  features:
+  - Sponsor plaque / framed team picture
+  - Social media recognition
+- name: Double
+  amount: $500
+  features:
+  - Sponsor plaque
+  - Website or sponsor page recognition
+  - Social media recognition
+- name: Triple
+  amount: $750
+  features:
+  - Sponsor plaque
+  - Player spotlight with sponsor logo
+  - Multiple social media posts
+- name: Home Run
+  amount: $1,000
+  features:
+  - Team banner with logo
+  - Sponsor plaque
+  - Social media recognition
+  - Website recognition
+- name: Grand Slam
+  amount: $2,000+
+  features:
+  - Premium sponsor recognition
+  - Team banner with logo
+  - Player spotlight opportunities
+  - Custom partnership options
+impact:
+- Player development resources
+- Practice and facility support
+- Tournament travel and entry costs
+- Scholarship and family assistance opportunities
+- Community programs and team operations

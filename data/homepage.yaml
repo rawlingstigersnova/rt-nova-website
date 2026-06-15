@@ -1,0 +1,66 @@
+hero:
+  kicker: Rawlings Tigers NOVA Baseball
+  title_lines:
+    - Develop.
+    - Compete.
+    - Represent.
+  intro: A Northern Virginia travel baseball program built around player development, competitive preparation, team culture, and a better experience for families.
+  primary:
+    label: View Teams
+    url: /teams/
+  secondary:
+    label: Become A Tiger
+    url: /become-a-tiger/
+  image: /images/teamlinkt/homepage-team-hero.png
+
+pillars:
+  - title: Player Development
+    text: Skill work, baseball IQ, confidence, and accountability.
+    icon: helmet-2-svgrepo-com
+  - title: Competitive Teams
+    text: Age-level teams built around growth and meaningful competition.
+    icon: bat-4-svgrepo-com
+  - title: Professional Coaching
+    text: Clear instruction, organized practices, and development standards.
+    icon: whistle-1-svgrepo-com
+  - title: Home Base
+    text: Proudly serving Woodbridge, Dumfries, Montclair, and Northern Virginia.
+    icon: baseball-stadium-1-svgrepo-com
+
+why:
+  kicker: Why Rawlings Tigers NOVA?
+  title: Built around growth, competition, and love for the game.
+  intro: We focus on better practices, smarter game preparation, accountable teammates, clear communication, and a travel baseball experience families can understand.
+
+proof:
+  - value: 10U–14U
+    label: Team age groups
+  - value: Northern Virginia
+    label: Local program roots
+  - value: Rawlings Tigers
+    label: National brand
+  - value: 501(c)(3)
+    label: Booster Club support
+
+social:
+  kicker: Follow Along
+  title: Social Hub
+  text: Follow along for team photos, player highlights, tryout updates, and program announcements.
+  empty_text: Social updates are coming soon. Check back for team highlights, player moments, and program announcements.
+  buttons:
+    - label: Follow on Facebook
+      icon: facebook
+      url: https://www.facebook.com/rawlingstigersNOVA/
+    - label: Follow on Instagram
+      icon: instagram
+      url: https://instagram.com/rawlingstigersnova/
+
+connect:
+  title: Ready to become a Tiger?
+  text: Interested in joining Rawlings Tigers NOVA outside official tryout dates? Tell us about your player and a coach will follow up.
+  primary:
+    label: Become A Tiger
+    url: /become-a-tiger/
+  secondary:
+    label: Contact Area Director
+    url: mailto:rawlingstigersnova@gmail.com

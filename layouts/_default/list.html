@@ -1,0 +1,13 @@
+{{ define "main" }}
+{{ partial "hero.html" (dict "kicker" "Rawlings Tigers NOVA" "title" .Title "intro" .Summary) }}
+<section class="rt-section">
+  <div class="rt-container rt-card-grid rt-card-grid--3">
+    {{ range .Pages.ByWeight }}
+    <a class="rt-link-card" href="{{ .RelPermalink }}">
+      <span>{{ .Title }}</span>
+      <small>{{ .Summary }}</small>
+    </a>
+    {{ end }}
+  </div>
+</section>
+{{ end }}

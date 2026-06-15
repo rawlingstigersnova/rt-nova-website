@@ -1,0 +1,47 @@
+{{ $footer := .Site.Data.footer }}
+<footer class="site-footer site-footer--twelve site-footer--rt-clean" role="contentinfo">
+  <div class="rt-shell--wide site-footer__inner site-footer__inner--simple">
+    <div class="site-footer__brand-block">
+      <a class="footer-brand" href="{{ partial "url.html" "/" }}" aria-label="Rawlings Tigers NOVA home">
+        <img src="{{ partial "url.html" "/images/teamlinkt/rawlings-tigers-nova-round-logo.png" }}" alt="Rawlings Tigers Northern Virginia" class="footer-brand__logo">
+      </a>
+    </div>
+
+    <nav class="site-footer__nav site-footer__nav--resources" aria-label="Resources">
+      <h3>{{ $footer.resources.title }}</h3>
+      {{ range $footer.resources.links }}
+        <a class="{{ if .highlight }}site-footer__standout-link{{ end }}" href="{{ partial "url.html" .url }}">{{ .name }}</a>
+      {{ end }}
+      <div class="site-footer__socials" aria-label="Social links">
+        {{ range $footer.social }}
+          <a href="{{ partial "url.html" .url }}" aria-label="{{ .name }}" target="_blank" rel="noopener noreferrer">
+            {{ partial "icon.html" .icon }}
+          </a>
+        {{ end }}
+      </div>
+    </nav>
+
+    <section class="site-footer__contact" aria-label="Contact">
+      <h3>{{ $footer.contact.title }}</h3>
+      <p class="site-footer__director-role">{{ $footer.contact.role }}</p>
+      <p class="site-footer__director-name">{{ $footer.contact.name }}</p>
+      <p class="site-footer__contact-line"><span>Phone:</span> <a href="{{ $footer.contact.phone_url }}">{{ $footer.contact.phone }}</a></p>
+      <p class="site-footer__contact-line"><span>Email:</span> <a href="{{ $footer.contact.email_url }}">{{ $footer.contact.email }}</a></p>
+    </section>
+  </div>
+
+  <div class="rt-shell--wide site-footer__bottom">
+    <div class="site-footer__bottom-left">
+      <span>© {{ now.Format "2006" }} {{ $footer.bottom.copyright }}</span>
+      {{ with $footer.bottom.links }}
+        <span class="site-footer__utility-links">
+          {{ range $index, $link := . }}
+            {{ if $index }}<span aria-hidden="true">|</span>{{ end }}
+            <a href="{{ partial "url.html" $link.url }}">{{ $link.name }}</a>
+          {{ end }}
+        </span>
+      {{ end }}
+    </div>
+    {{ with $footer.bottom.credit }}<span>{{ . }}</span>{{ end }}
+  </div>
+</footer>

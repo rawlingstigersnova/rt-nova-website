@@ -1,0 +1,4 @@
+---
+title: "Coaches"
+template: "coaches"
+---

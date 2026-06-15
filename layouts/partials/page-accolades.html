@@ -1,0 +1,38 @@
+{{ $data := .Site.Data.accolades }}
+{{ partial "hero.html" (dict "kicker" "Program Recognition" "title" .Title "intro" $data.intro "actions" (slice (dict "label" "Team Central" "url" "/teams/" "class" "rt-btn-primary") (dict "label" "Coaches" "url" "/coaches/" "class" "rt-btn-outline"))) }}
+<section class="rt-section">
+  <div class="rt-container rt-section-heading">
+    <p class="rt-eyebrow rt-eyebrow--dark">Achievements</p>
+    <h2>Team banners and player highlights.</h2>
+  </div>
+  <div class="rt-container rt-stack">
+  {{ range $data.years }}
+    <section class="rt-season-block">
+      <div class="rt-season-head">
+        <div><span class="rt-eyebrow">Season</span><h2>{{ .year }}</h2></div>
+        <span class="rt-season-count">{{ len .teams }} teams</span>
+      </div>
+      <div class="rt-card-grid rt-card-grid--2">
+        {{ range .teams }}
+        <article class="rt-accolade-card">
+          <h3>{{ .team }}</h3>
+          {{ with .items }}<ul class="rt-check-list">{{ range . }}<li>{{ . }}</li>{{ end }}</ul>{{ end }}
+          {{ with .banners }}
+          <h4>Tournament Banners</h4>
+          <div class="rt-image-grid rt-image-grid--banners">
+            {{ range . }}<figure>{{ if .link }}<a href="{{ .link }}" target="_blank" rel="noopener">{{ end }}<img src="{{ partial "url.html" .image }}" alt="{{ .alt }}" loading="lazy">{{ if .link }}</a>{{ end }}<figcaption>{{ .alt }}</figcaption></figure>{{ end }}
+          </div>
+          {{ end }}
+          {{ with .highlights }}
+          <h4>Player Highlights</h4>
+          <div class="rt-image-grid rt-image-grid--highlights">
+            {{ range . }}<figure>{{ if .link }}<a href="{{ .link }}" target="_blank" rel="noopener">{{ end }}<img src="{{ partial "url.html" .image }}" alt="{{ .alt }}" loading="lazy">{{ if .link }}</a>{{ end }}<figcaption>{{ .alt }}</figcaption></figure>{{ end }}
+          </div>
+          {{ end }}
+        </article>
+        {{ end }}
+      </div>
+    </section>
+  {{ end }}
+  </div>
+</section>

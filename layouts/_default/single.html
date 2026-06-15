@@ -1,0 +1,16 @@
+{{ define "main" }}
+  {{ $template := .Params.template | default "" }}
+  {{ if eq $template "teams" }}{{ partial "page-teams.html" . }}
+  {{ else if eq $template "coaches" }}{{ partial "page-coaches.html" . }}
+  {{ else if eq $template "tryouts" }}{{ partial "page-tryouts.html" . }}
+  {{ else if eq $template "sponsors" }}{{ partial "page-sponsors.html" . }}
+  {{ else if eq $template "accolades" }}{{ partial "page-accolades.html" . }}
+  {{ else }}
+    {{ partial "hero.html" (dict "kicker" "Rawlings Tigers NOVA" "title" .Title "intro" .Summary) }}
+    <article class="rt-section">
+      <div class="rt-container rt-prose-card">
+        {{ .Content }}
+      </div>
+    </article>
+  {{ end }}
+{{ end }}

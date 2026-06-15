@@ -1,0 +1,17 @@
+items:
+  - title: Tryouts
+    description: View age groups, evaluation information, and registration details.
+    url: /tryouts/
+    cta: View Tryouts
+  - title: Team Central
+    description: Browse NOVA teams by baseball season, coach, status, and team links.
+    url: /teams/
+    cta: Browse Teams
+  - title: Become A Tiger
+    description: Start the player interest or registration process.
+    url: /become-a-tiger/
+    cta: Register
+  - title: Sponsors
+    description: Support player development, facilities, travel, and community programs.
+    url: /sponsors/
+    cta: Sponsor NOVA

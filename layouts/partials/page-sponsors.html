@@ -1,0 +1,19 @@
+{{ $data := .Site.Data.sponsors }}
+{{ partial "hero.html" (dict "kicker" "NOVA Tigers Booster Club" "title" .Title "intro" $data.intro "actions" (slice (dict "label" "Email Booster Club" "url" (printf "mailto:%s" $data.contact.email) "class" "rt-btn-primary") (dict "label" "Call" "url" "tel:+15407485300" "class" "rt-btn-outline"))) }}
+<section class="rt-section rt-section--tight">
+  <div class="rt-container rt-card-grid rt-card-grid--2">
+    <article class="rt-info-card"><p class="rt-eyebrow rt-eyebrow--dark">Impact</p><h2>Sponsorship supports the full program.</h2><ul>{{ range $data.impact }}<li>{{ . }}</li>{{ end }}</ul></article>
+    <article class="rt-info-card rt-info-card--dark"><p class="rt-eyebrow">Contact</p><h2>Partner with Rawlings Tigers NOVA.</h2><p><strong>Email:</strong> <a href="mailto:{{ $data.contact.email }}">{{ $data.contact.email }}</a></p><p><strong>Phone:</strong> {{ $data.contact.phone }}</p></article>
+  </div>
+</section>
+<section class="rt-section">
+  <div class="rt-container rt-section-heading">
+    <p class="rt-eyebrow rt-eyebrow--dark">Packages</p>
+    <h2>Sponsorship levels.</h2>
+  </div>
+  <div class="rt-container rt-card-grid rt-card-grid--4">
+  {{ range $data.packages }}
+    <article class="rt-package-card"><span class="rt-price">{{ .amount }}</span><h3>{{ .name }}</h3><ul>{{ range .features }}<li>{{ . }}</li>{{ end }}</ul></article>
+  {{ end }}
+  </div>
+</section>

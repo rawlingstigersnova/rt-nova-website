@@ -1,0 +1,34 @@
+/* Responsive polish for homepage/header/footer. Loaded last. */
+html,body{max-width:100%;overflow-x:hidden;}
+.site-header--twelve .site-header__bar{min-height:clamp(70px,7vw,88px);}
+.site-brand--image{display:flex;align-items:center;gap:.75rem;min-width:0;}
+.site-brand--image .site-brand__logo{width:clamp(52px,5.2vw,76px);height:clamp(52px,5.2vw,76px);object-fit:contain;flex:0 0 auto;}
+.site-brand--image .site-brand__wordmark{min-width:0;}
+.site-header--twelve .site-nav--twelve{gap:clamp(.75rem,1.15vw,1.35rem);}
+.site-header--twelve .site-nav--twelve a{font-size:clamp(.7rem,.7vw,.8rem);}
+.site-header--twelve .site-header-cta{min-height:42px;padding:.78rem 1rem;font-size:.74rem;}
+.site-header__actions{gap:.65rem;}
+.home-hero{min-height:clamp(520px,65vw,640px);}
+.home-hero__inner{min-height:clamp(520px,65vw,640px);}
+.connect-band .rt-kicker{font-size:clamp(1.6rem,3vw,2.25rem);line-height:.95;}
+.connect-band__inner{align-items:center;}
+@media (max-width:1080px){
+  .site-header--twelve .site-nav--twelve{top:78px;}
+  .site-header__actions .site-social-icon{display:none;}
+}
+@media (max-width:760px){
+  .home-hero__lead{font-size:1rem;}
+  .proof-band__grid{gap:.25rem;}
+  .proof-band strong{font-size:1.35rem;}
+  .connect-band{padding:1.65rem 0;}
+  .connect-band__inner{gap:1.2rem;}
+  .connect-band .rt-action-row{width:100%;}
+}
+@media (max-width:520px){
+  .site-brand--image .site-brand__wordmark{display:none;}
+  .site-header--twelve .site-header__bar{min-height:66px;}
+  .site-header--twelve .site-nav--twelve{top:66px;}
+  .program-strip__item{padding:1.25rem .95rem;min-height:0;}
+  .program-strip__item h2{font-size:1.18rem;}
+  .program-strip__item p{font-size:.82rem;}
+}
